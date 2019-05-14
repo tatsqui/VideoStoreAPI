@@ -27,11 +27,11 @@ describe CustomersController do
     end
 
     it "returns pets with exactly the required fields" do
-      keys = %w(name address registered_at city state postal_code phone)
+      keys = %w(name registered_at address city state postal_code phone)
       get customers_path
       body = JSON.parse(response.body)
       body.each do |customer|
-        customer.keys.sort.must_equal keys
+        customer.keys.must_equal keys
       end
     end
   end
