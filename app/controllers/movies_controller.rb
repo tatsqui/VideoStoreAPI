@@ -1,15 +1,24 @@
 class MoviesController < ApplicationController
-
   def index
     movies = Movie.all
-    render status: :ok, json: movies.as_json(only: [:title, :inventory, :overview, :release_date])
+    render status: :ok, json: movies.as_json(only: [:id, :title, :inventory, :overview, :release_date])
+  end
+
+  def create
+    movie = Movie.new(movie_params)
+
+    if movie.save
+      render json: movie.as_json(only: [:id]),
+             status: :ok
+    else
+      render json: { ok: false, errors: ["Movie could not be saved"] },
+             status: :bad_request
+    end
   end
 
   private
-  
+
   def movie_params
-    params.require(movie).permit(:title, :inventory, :overview, :release_date)
+    params.require(:movie).permit(:title, :inventory, :overview, :release_date)
   end
 end
-
-
