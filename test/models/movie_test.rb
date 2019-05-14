@@ -6,12 +6,21 @@ describe Movie do
   describe "validations and instantiation" do 
     it "won't be valid without title and inventory" do
       expect(movie).wont_be :valid?
+
+      # for title
+      expect(movie.errors.messages).must_include :title
+      expect(movie.errors.messages[:title]).must_equal ["can't be blank"]
+      
+      # for inventory
+      expect(movie.errors.messages).must_include :inventory
+      expect(movie.errors.messages[:inventory]).must_equal ["can't be blank"]
     end
 
     it "will be valid with title and inventory" do 
       movie.update_attributes({ title: "Test movie", inventory: 5 })
 
       expect(movie).must_be :valid?
+      expect(movie.errors.messages).must_be_empty
     end
 
     it "responds to its fields" do 
