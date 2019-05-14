@@ -32,7 +32,7 @@ describe MoviesController do
     it "returns movies with exactly the required fields" do 
       get movies_path
 
-      keys = %w(title overview release_date inventory)
+      keys = %w(id title overview release_date inventory)
       movie = movies(:movie_one)
       body = JSON.parse(response.body)
 
