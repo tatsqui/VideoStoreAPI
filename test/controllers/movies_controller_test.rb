@@ -56,9 +56,10 @@ describe MoviesController do
     it "responds with 404 with nonexistant id" do 
       movie_id = Movie.last.id + 1
       get movie_path(movie_id)
+      body = JSON.parse(response.body)
 
       must_respond_with :not_found
-      expect(JSON.parse(response.body)).must_equal "errors"=>["The movie with id 624739302 could not be found"]
+      expect(body["errors"]).must_equal ["The movie with id 624739302 could not be found"]
     end
   end
 end
