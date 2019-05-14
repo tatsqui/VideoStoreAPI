@@ -3,7 +3,7 @@ require "test_helper"
 describe Movie do
   let(:movie) { Movie.new }
 
-  describe "validations" do 
+  describe "validations and instantiation" do 
     it "won't be valid without title and inventory" do
       expect(movie).wont_be :valid?
     end
