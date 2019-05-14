@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
       render json: movie.as_json(only: [:id]),
              status: :ok
     else
-      render json: { ok: false, errors: ["Movie could not be saved"] },
+      render json: { errors: ["Movie could not be saved"] },
              status: :bad_request
     end
   end
