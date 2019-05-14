@@ -65,6 +65,7 @@ describe MoviesController do
       movie = Movie.find(body["id"].to_i)
 
       expect(movie.title).must_equal movie_data[:title]
+      expect(movie.available_inventory).must_equal movie_data[:inventory]
       must_respond_with :success
     end
 

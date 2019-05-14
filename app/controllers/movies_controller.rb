@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
 
   def create
     movie = Movie.new(movie_params)
+    movie.available_inventory = movie.inventory
 
     if movie.save
       render json: movie.as_json(only: [:id]),
