@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_220013) do
     t.integer "inventory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "available_inventory"
   end
 
 end
