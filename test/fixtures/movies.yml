@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  overview: MyString
-  release_date: 2019-05-14
-  inventory: 1
+movie_one:
+  title: Karate Kid
+  overview: Learn's how to become an honorable young man
+  release_date: 1985-05-14
+  inventory: 10
 
-two:
-  title: MyString
-  overview: MyString
-  release_date: 2019-05-14
-  inventory: 1
+movie_two:
+  title: Love and Basketball
+  overview: Love and stuff
+  release_date: 1995-05-11
+  inventory: 5
+
+
