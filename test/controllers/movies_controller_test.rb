@@ -59,7 +59,7 @@ describe MoviesController do
       body = JSON.parse(response.body)
 
       must_respond_with :not_found
-      expect(body["errors"]).must_equal ["The movie with id 624739302 could not be found"]
+      expect(body["errors"]).must_equal ["The movie with id #{movie_id} could not be found"]
     end
   end
 end
