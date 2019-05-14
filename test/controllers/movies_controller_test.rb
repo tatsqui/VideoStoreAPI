@@ -41,4 +41,10 @@ describe MoviesController do
       end
     end
   end
+
+  describe "show" do 
+    it "movie_path renders correctly" do 
+
+    end
+  end
 end
