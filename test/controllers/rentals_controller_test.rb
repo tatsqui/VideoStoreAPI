@@ -4,7 +4,7 @@ describe RentalsController do
   describe "checkout" do 
     # nominal success cases
     it "when checked out it adds a rental record to the rental table" do 
-      
+      post checkout_path(movies(:movie_one))
     end
 
     it "when checked out changes available to false" do 
