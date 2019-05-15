@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
     movie.available_inventory = movie.inventory
 
     if movie.save
-      render json: movie.as_json(only: [:id]),
+      render json: movie.as_json(only: [:id, :title, :overview, :release_date, :inventory, :available_inventory]),
              status: :ok
     else
       render json: { errors: ["Movie could not be saved"] },
@@ -30,6 +30,6 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :inventory, :overview, :release_date)
+    params.permit(:title, :inventory, :overview, :release_date)
   end
 end
