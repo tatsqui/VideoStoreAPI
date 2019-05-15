@@ -1,7 +1,34 @@
 require "test_helper"
 
 describe RentalsController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "checkout" do 
+    # nominal success cases
+    it "when checked out it adds a rental record to the rental table" do 
+      
+    end
+
+    it "when checked out changes available to false" do 
+
+    end
+
+    it "when checked out decreases inventory by one" do
+      
+    end
+
+    # nominal failure cases
+    it "will not checkout a movie when all are unavailable" do 
+
+    end
+
+    # edge failure
+    it "will not check out a non existant (bogus) movie" do 
+
+    end
+
+    # edge success
+    it "will allow a movie to be checked out on the same day it is checked back in" do 
+      # check out movie, check back in and then check out again. 
+    end
+
+  end
 end
