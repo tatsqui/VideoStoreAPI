@@ -5,11 +5,13 @@ movie_one:
   overview: Learn's how to become an honorable young man
   release_date: 1985-05-14
   inventory: 10
+  available_inventory: 10
 
 movie_two:
   title: Love and Basketball
   overview: Love and stuff
   release_date: 1995-05-11
   inventory: 5
+  available_inventory: 4
 
 
