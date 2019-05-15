@@ -1,19 +1,25 @@
+require 'pry'
 class RentalsController < ApplicationController
   
   def checkout
-  #   rental = Rental.new(movie_id: params[:movie_id], customer_id: params[:customer_id])
-  #   movie = Movie.find_by(id: params[:movie_id])
+    rental = Rental.new(rental_params)
+    movie = Movie.find_by(id: params[:movie_id])
 
-  #   rental.checkout_date = Date.today
-  #   rental.due_date = rental.checkout_date + 7
-
-  #   if rental.save
-  #     movie.update_attributes({inventory: movie.inventory - 1})
-  #     render json: movie.as_json(only: [:id]),
-  #     status: :ok
-  #   else 
-  #     render json: {}
-  #   end
+    rental.checkout_date = Date.today
+    rental.due_date = rental.checkout_date + 7
+    
+    if movie.reduce_avail_inventory
+      if rental.save
+        render json: rental.as_json(only: [:id, :movie_id, :customer_id, :due_date]),
+        status: :ok
+      else 
+        render json: { errors: [rental.errors.messages] },
+        status: :bad_request
+      end
+    else
+      render json: { errors: [movie.errors.messages] },
+      status: :bad_request
+    end
   end
   
   private
