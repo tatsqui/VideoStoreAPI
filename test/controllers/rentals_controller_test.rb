@@ -49,13 +49,35 @@ describe RentalsController do
       
       body = JSON.parse(response.body)
       expect(body).must_include "errors"
-      expect(body["errors"]).must_include "Cannot create rental due to insufficient inventory"
+      expect(body["errors"]).must_include "Could not create rental request"
       
     end
 
     # edge failure
     it "will not check out a non existant (bogus) movie" do 
-      skip
+      rental_no_movie = { 
+          movie_id: -1, 
+          customer_id: customers(:jose).id 
+        }
+
+      expect{
+        post checkout_path, params: rental_no_movie
+      }.wont_change "Rental.count"
+
+      body = JSON.parse(response.body)
+      expect(body).must_include "errors"
+      expect(body["errors"]).must_include "Could not create rental request"
+      
+    end
+
+    it "will not check out a non existant (bogus) customer" do 
+      rental_no_customer = { movie_id: movies(:unavailable_movie).id, 
+          customer_id: -1
+        }
+
+        expect{
+          post checkout_path, params: rental_no_customer
+        }.wont_change "Rental.count"
     end
 
     # edge success
