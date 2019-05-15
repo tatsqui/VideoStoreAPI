@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  movie: one
-  customer: one
+  movie: movie_one
+  customer: jose
   checkout_date: 2019-05-15
   due_date: 2019-05-15
   available: false
 
 two:
-  movie: two
-  customer: two
+  movie: movie_two
+  customer: skyler
   checkout_date: 2019-05-15
   due_date: 2019-05-15
   available: false
