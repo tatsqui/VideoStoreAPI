@@ -17,7 +17,7 @@ class RentalsController < ApplicationController
         status: :bad_request
       end
     else
-      render json: { errors: [movie.errors.messages] },
+      render json: { errors: ["Cannot create rental due to insufficient inventory"] },
       status: :bad_request
     end
   end
