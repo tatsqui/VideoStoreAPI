@@ -61,11 +61,6 @@ describe MoviesController do
       body = JSON.parse(response.body)
       expect(body).must_be_kind_of Hash
       expect(body).must_include "id"
-      expect(body).must_include "title"
-      expect(body).must_include "overview"
-      expect(body).must_include "release_date"
-      expect(body).must_include "inventory"
-      expect(body).must_include "available_inventory"
 
       movie = Movie.find(body["id"].to_i)
 

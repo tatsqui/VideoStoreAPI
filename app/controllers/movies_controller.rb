@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
     movie.available_inventory = movie.inventory
 
     if movie.save
-      render json: movie.as_json(only: [:id, :title, :overview, :release_date, :inventory, :available_inventory]),
+      render json: movie.as_json(only: [:id]),
              status: :ok
     else
       render json: { errors: ["Movie could not be saved"] },
