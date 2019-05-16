@@ -28,19 +28,38 @@ describe RentalsController do
   end
 
   describe "checkin" do
-    it "can checkin a movie if inventory is greater than available inventory" do
-    end
+    let(:customer1) { customers(:skyler) }
+    let(:movie1) { movies(:movie_two) }
+    let(:rental_data1) {
+      {
+        movie_id: movie1.id,
+        customer_id: customer1.id,
+      }
+    }
 
-    it "will increase the available inventory when a movie is checked in" do
+    let(:customer2) { customers(:jose) }
+    let(:movie2) { movies(:movie_one) }
+    let(:rental_data2) {
+      {
+        movie_id: movie2.id,
+        customer_id: customer2.id,
+      }
+    }
+
+    it "can checkin a movie if inventory is greater than available inventory" do
+      post checkin_path, params: rental_data1
+
+      must_respond_with :success
     end
 
     it "can't checkin a movie if inventory equals available inventory" do
+      post checkin_path, params: rental_data2
+
+      must_respond_with :not_found
     end
 
     it "can't checkin a non existent movie" do
+      skip
     end
-
-    # it "can only checkin a movie that specific customer checked out" do
-    # end
   end
 end
