@@ -46,6 +46,13 @@ describe RentalsController do
       }
     }
 
+    let(:rental_data3) {
+      {
+        movie_id: "dog",
+        customer_id: customer2.id,
+      }
+    }
+
     it "can checkin a movie if inventory is greater than available inventory" do
       post checkin_path, params: rental_data1
 
@@ -55,11 +62,13 @@ describe RentalsController do
     it "can't checkin a movie if inventory equals available inventory" do
       post checkin_path, params: rental_data2
 
-      must_respond_with :not_found
+      must_respond_with :bad_request
     end
 
     it "can't checkin a non existent movie" do
-      skip
+      post checkin_path, params: rental_data3
+
+      must_respond_with :not_found
     end
   end
 end
