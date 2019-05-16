@@ -14,5 +14,10 @@ movie_two:
   inventory: 5
   available_inventory: 4
 
-
+unavailable_movie:
+  title: All Checked Out
+  overview: You can't rent me
+  release_date: 2019-05-10
+  inventory: 2
+  available_inventory: 0
 

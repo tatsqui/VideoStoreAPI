@@ -16,9 +16,9 @@ describe Movie do
       expect(movie.errors.messages[:inventory]).must_equal ["can't be blank"]
     end
 
-    it "will be valid with title and inventory" do
-      movie.update_attributes({ title: "Test movie", inventory: 5 })
-
+    it "will be valid with title and inventory and available inventory" do
+      movie.update_attributes({ title: "Test movie", inventory: 5, available_inventory: 5 })
+      
       expect(movie).must_be :valid?
       expect(movie.errors.messages).must_be_empty
     end
@@ -60,6 +60,34 @@ describe Movie do
         new_amount = movie1.available_inventory
 
         expect(new_amount).must_equal amount
+      end
+    end
+
+    describe "reduce avail inventory" do 
+      let(:karate_movie) { movies(:movie_one) }
+
+      it "when a movie is checked out will reduce available_inventory by 1" do 
+        current_count = karate_movie.available_inventory
+
+        karate_movie.reduce_avail_inventory
+        karate_movie.reload
+        expect(karate_movie.available_inventory).must_equal current_count - 1
+      end
+
+      it "returns false if no available inventory to checkout" do 
+        10.times do 
+          karate_movie.reduce_avail_inventory
+        end
+        current_count = karate_movie.available_inventory
+        expect(current_count).must_equal 0
+
+        expect{
+          karate_movie.reduce_avail_inventory
+        }.wont_change "karate_movie.available_inventory"
+        
+        result = karate_movie.reduce_avail_inventory
+
+        expect(result).must_equal false
       end
     end
   end
