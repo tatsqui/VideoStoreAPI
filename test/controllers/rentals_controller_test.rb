@@ -23,18 +23,16 @@ describe RentalsController do
     end
 
     it "when checked out decreases inventory by one" do
-      movie = movies(:movie_one)
-      before_inventory = movie.available_inventory
+      
+      expect {
+        post checkout_path, params: rental_data
+      }.must_change "Movie.find(rental_data[:movie_id]).available_inventory", -1
 
-      post checkout_path, params: rental_data
-      movie.reload
-
-      current_inventory = movie.available_inventory
-      expect(current_inventory).must_equal before_inventory - 1
+      must_respond_with :success
     end
 
     # nominal failure cases
-    it "will not checkout a movie when all are unavailable" do 
+    it "will not checkout a movie with 0 available inventory" do 
       cant_rent_data = { 
           movie_id: movies(:unavailable_movie).id, 
           customer_id: customers(:jose).id 
@@ -47,6 +45,11 @@ describe RentalsController do
       expect(body).must_include "errors"
       expect(body["errors"]).must_include "Could not create rental request"
       
+      expect{
+        post checkout_path, params: cant_rent_data
+      }.wont_change "Movie.find(cant_rent_data[:movie_id]).available_inventory"
+
+      must_respond_with :bad_request
     end
 
     # edge failure
