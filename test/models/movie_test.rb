@@ -36,29 +36,31 @@ describe Movie do
   end
 
   describe "custom methods" do
-    let(:movie) { movies(:movie_two) }
-    let(:movie1) { movies (:movie_one) }
+    describe "checkin" do
+      let(:movie) { movies(:movie_two) }
+      let(:movie1) { movies (:movie_one) }
 
-    it "will increase the available inventory when a movie is checked in" do
-      amount = movie.available_inventory
-      movie.increase_available_inventory
+      it "will increase the available inventory when a movie is checked in" do
+        amount = movie.available_inventory
+        movie.increase_available_inventory
 
-      movie.reload
+        movie.reload
 
-      new_amount = movie.available_inventory
+        new_amount = movie.available_inventory
 
-      expect(new_amount).must_equal amount + 1
-    end
+        expect(new_amount).must_equal amount + 1
+      end
 
-    it "will not increase the available inventory when the movie is not currently checked out" do
-      amount = movie1.available_inventory
-      movie1.increase_available_inventory
+      it "will not increase the available inventory when the movie is not currently checked out" do
+        amount = movie1.available_inventory
+        movie1.increase_available_inventory
 
-      movie1.reload
+        movie1.reload
 
-      new_amount = movie1.available_inventory
+        new_amount = movie1.available_inventory
 
-      expect(new_amount).must_equal amount
+        expect(new_amount).must_equal amount
+      end
     end
   end
 end

@@ -59,6 +59,12 @@ describe RentalsController do
       must_respond_with :success
     end
 
+    # it "will increase availalbe inventory if a valid checkin" do
+    #   checked_in = post checkin_path, params: rental_data1
+
+    #   expect(Movie.find_by(checked_in.movie_id).available_inventory).must_change 1
+    # end
+
     it "can't checkin a movie if inventory equals available inventory" do
       post checkin_path, params: rental_data2
 
