@@ -67,7 +67,6 @@ describe RentalsController do
       body = JSON.parse(response.body)
       expect(body).must_include "errors"
       expect(body["errors"]).must_include "Could not create rental request"
-      
     end
 
     it "will not check out a non existant (bogus) customer" do 
@@ -78,12 +77,22 @@ describe RentalsController do
         expect{
           post checkout_path, params: rental_no_customer
         }.wont_change "Rental.count"
+
+      body = JSON.parse(response.body)
+      expect(body).must_include "errors"
+      expect(body["errors"]).must_include "Could not create rental request"
     end
 
     # edge success
-    it "will allow a movie to be checked out on the same day it is checked back in" do 
-      skip # check out movie, check back in and then check out again. 
-    end
+    # it "will allow a movie to be checked out on the same day it is checked back in" do 
+    #   skip
+    #   post checkout_path, params: rental_data
+    #   # must be same movie
+    #   patch checkin_path, params: checkin_data
+    #   post checkout_path, params: rental_data
+      
+    #   must_respond_with :success
+    # end
 
   end
 end
