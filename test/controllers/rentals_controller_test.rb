@@ -119,19 +119,17 @@ describe RentalsController do
     }
 
     it "can checkin a movie if inventory is greater than available inventory" do
-      post checkin_path, params: rental_data1
+      expect {
+        post checkin_path, params: rental_data1
+      }.must_change "Movie.find(rental_data1[:movie_id]).available_inventory", +1
 
       must_respond_with :success
     end
 
-    # it "will increase availalbe inventory if a valid checkin" do
-    #   checked_in = post checkin_path, params: rental_data1
-
-    #   expect(Movie.find_by(checked_in.movie_id).available_inventory).must_change 1
-    # end
-
     it "can't checkin a movie if inventory equals available inventory" do
-      post checkin_path, params: rental_data2
+      expect {
+        post checkin_path, params: rental_data2
+      }.wont_change "Movie.find(rental_data1[:movie_id]).available_inventory"
 
       must_respond_with :bad_request
     end
