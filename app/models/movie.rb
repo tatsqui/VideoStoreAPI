@@ -6,7 +6,7 @@ class Movie < ApplicationRecord
     amount = self.available_inventory
     
     if amount != 0
-     self.available_inventory = amount - 1
+     self.available_inventory -= 1
      return self.save!
     else
       return false
